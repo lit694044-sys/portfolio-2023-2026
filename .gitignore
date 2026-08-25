@@ -9,9 +9,6 @@ tmp/
 github-pages-publish/
 github-upload-b1/
 
-# Local backup copy of source assets
-renova-backup-20260815-021032/
-
 # Local tooling/cache files
 .DS_Store
 Thumbs.db
