@@ -134,8 +134,8 @@ if(about){
   const aboutTitle=about.querySelector('h1');
   const aboutCopy=about.querySelector('p');
   if(aboutTitle)aboutTitle.textContent='About Me';
-  if(aboutCopy){aboutCopy.textContent='我喜欢从真实的生活出发，把复杂的问题梳理清楚，再用设计做出有温度、好用、有趣的体验。';const education=document.createElement('p');education.innerHTML='<strong>Education</strong><br>廊坊师范学院 · 产品设计<br><br>在校期间参与廊坊市精协与自闭症儿童康复机构开展的公益活动，并获市媒体报道；曾担任项目负责人，参与装置艺术作品落地、创新创业大赛与“挑战杯”并获奖；在校作品成功申请版权3项、专利1项，并积极参加“三下乡”非遗活动及志愿服务。';aboutCopy.after(education)}
-const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award-link')){const award=document.createElement('a');award.className='award-link';award.href='奖状.html';award.setAttribute('aria-label','查看 Design Awards 页面');award.innerHTML='<span class="award-content"><span>Design Awards</span><span class="award-arrow" aria-hidden="true"></span></span>';((stats.children[1]||stats.firstElementChild)||stats).appendChild(award)}
+  if(aboutCopy){aboutCopy.textContent='我喜欢从真实的生活出发，把复杂的问题梳理清楚，再用设计做出有温度、好用、有趣的体验。';const aiCopy=document.createElement('p');aiCopy.textContent='目前持续学习 AI 设计软件，熟悉 GPT、Codex、Gemini 和 Lovart 等工作流。';const education=document.createElement('p');education.innerHTML='<strong>Education</strong><br>廊坊师范学院 · 产品设计<br><br>在校期间参与廊坊市精协与自闭症儿童康复机构开展的公益活动，并获市媒体报道；曾担任项目负责人，参与装置艺术作品落地、创新创业大赛与“挑战杯”并获奖；在校作品成功申请版权3项、专利1项，并积极参加“三下乡”非遗活动及志愿服务。';aboutCopy.after(aiCopy,education)}
+const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award-link')){const award=document.createElement('a');award.className='award-link';award.href='奖状.html';award.setAttribute('aria-label','查看 Design Awards 页面');award.innerHTML='<span class="award-content"><span>Design Awards</span><span class="award-arrow" aria-hidden="true"></span></span>';((stats.children[0]||stats.firstElementChild)||stats).appendChild(award)}
 }
 const aboutImage=about?.querySelector('img');
 if(aboutImage){
