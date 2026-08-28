@@ -45,10 +45,10 @@ section{padding:140px 0}.about{width:min(1700px,92vw);margin:auto;display:block}
 .extra-work-link:hover{background:#59616b;color:#fff;transform:translateY(-5px);box-shadow:0 16px 34px rgba(50,60,70,.2)}
 .extra-work-link:active{transform:translateY(-1px) scale(.96);box-shadow:0 5px 12px rgba(50,60,70,.12)}
 @media(max-width:900px){.extra-work-links{gap:12px;margin-bottom:64px;padding:0 8vw}.extra-work-link{min-height:96px;padding:22px 14px;font-size:18px}}
-.award-link{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;width:214px;height:56px;margin:48px 0 0;padding:0 20px;border:1px solid rgba(255,255,255,.82);border-radius:999px;background:linear-gradient(110deg,rgba(255,255,255,.24),rgba(224,235,245,.42),rgba(255,255,255,.2));color:#59616b;text-decoration:none;font-size:15px;font-weight:400;letter-spacing:.02em;white-space:nowrap;line-height:1;box-shadow:0 10px 26px rgba(50,60,70,.1),inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(150,170,190,.12);transition:transform .35s ease,background .35s ease,color .35s ease,box-shadow .35s ease}
+.award-link{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;width:180px;height:44px;margin:34px 0 0;padding:0 16px;border:1px solid rgba(255,255,255,.82);border-radius:999px;background:linear-gradient(110deg,rgba(255,255,255,.24),rgba(224,235,245,.42),rgba(255,255,255,.2));color:#59616b;text-decoration:none;font-size:14px;font-weight:400;letter-spacing:.02em;white-space:nowrap;line-height:1;box-shadow:0 10px 26px rgba(50,60,70,.1),inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(150,170,190,.12);transition:transform .35s ease,background .35s ease,color .35s ease,box-shadow .35s ease}
 .award-link::before{content:'';position:absolute;z-index:-1;inset:0;width:42%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-180%) skewX(-18deg);transition:transform .8s ease}.award-content{display:inline-flex;align-items:center;gap:8px;transition:transform .35s ease}.award-arrow{display:block;width:9px;height:9px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;border-radius:0 0 1px 0;transform:rotate(-45deg)}.award-link:hover{background:linear-gradient(110deg,rgba(255,255,255,.34),rgba(204,222,237,.56),rgba(255,255,255,.25));color:#394652;transform:translateY(-4px);box-shadow:0 0 0 4px rgba(190,208,224,.16),0 15px 32px rgba(50,60,70,.16),inset 0 1px 1px rgba(255,255,255,.95)}.award-link:hover .award-content{transform:translateX(3px)}.award-link:hover::before{transform:translateX(420%) skewX(-18deg)}
-.stats>div:first-child,.stats>div:nth-child(2){display:flex;flex-direction:column;align-items:flex-start}.stats>div:first-child .award-link,.stats>div:nth-child(2) .award-link{display:flex;flex:none;width:214px;margin-top:48px}
-@media(max-width:900px){.award-link{width:198px;height:52px;margin-top:38px;font-size:14px}.stats>div:first-child .award-link{width:198px;margin-top:38px}}
+.stats>div:first-child,.stats>div:nth-child(2){display:flex;flex-direction:column;align-items:flex-start}.stats>div:first-child .award-link{display:flex;flex:none;width:180px;margin-top:34px}.stats>div:nth-child(2) .award-link{display:none}
+@media(max-width:900px){.award-link{width:180px;height:44px;margin-top:30px;font-size:14px}.stats>div:first-child .award-link{width:180px;margin-top:30px}}
 /* 手机版专用布局 */
 @media(max-width:900px){
   html,body{width:100%;overflow-x:hidden}
@@ -120,12 +120,15 @@ items.slice(0,projectMeta.length).forEach((item,index)=>{const card=item.querySe
 const cursor=document.querySelector('.cursor');
 let cursorX=0,cursorY=0,renderedX=0,renderedY=0;
 addEventListener('pointermove',event=>{cursorX=event.clientX;cursorY=event.clientY});
-const renderCursor=()=>{renderedX+=(cursorX-renderedX)*.18;renderedY+=(cursorY-renderedY)*.18;cursor.style.left=renderedX+'px';cursor.style.top=renderedY+'px';requestAnimationFrame(renderCursor)};renderCursor();
+const renderCursor=()=>{renderedX+=(cursorX-renderedX)*.1;renderedY+=(cursorY-renderedY)*.1;cursor.style.left=renderedX+'px';cursor.style.top=renderedY+'px';requestAnimationFrame(renderCursor)};renderCursor();
 addEventListener('load',()=>{const returnScroll=sessionStorage.getItem('portfolio-return-scroll');if(returnScroll!==null){requestAnimationFrame(()=>{scrollTo(0,Number(returnScroll));sessionStorage.removeItem('portfolio-return-scroll')})}});
 document.querySelectorAll('a,button,.card-link').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('is-hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('is-hover'))});
+let trackScrollFrame=0;
+const easeOutCubic=t=>1-Math.pow(1-t,3);
+const slowScrollTo=target=>{cancelAnimationFrame(trackScrollFrame);const start=track.scrollLeft;const distance=target-start;const started=performance.now();const duration=1150;const step=now=>{const progress=Math.min(1,(now-started)/duration);track.scrollLeft=start+distance*easeOutCubic(progress);if(progress<1)trackScrollFrame=requestAnimationFrame(step)};trackScrollFrame=requestAnimationFrame(step)};
 items.forEach(item=>{
   item.addEventListener('click',event=>{if(item.getAttribute('href')&&item.getAttribute('href')!=='#'){sessionStorage.setItem('portfolio-return-scroll',String(scrollY))}});
-  item.addEventListener('mouseenter',()=>{const itemCenter=item.offsetLeft+item.offsetWidth/2;const targetLeft=itemCenter-track.clientWidth/2;track.scrollTo({left:Math.max(0,targetLeft),behavior:'smooth'})});
+  item.addEventListener('mouseenter',()=>{const itemCenter=item.offsetLeft+item.offsetWidth/2;const targetLeft=Math.min(track.scrollWidth-track.clientWidth,Math.max(0,itemCenter-track.clientWidth/2));slowScrollTo(targetLeft)});
   item.addEventListener('mousemove',event=>{const box=item.getBoundingClientRect();item.style.setProperty('--tx',((event.clientX-box.left)/box.width-.5)*10+'px');item.style.setProperty('--ty',((event.clientY-box.top)/box.height-.5)*10+'px')});
   item.addEventListener('mouseleave',()=>{item.style.removeProperty('--tx');item.style.removeProperty('--ty')});
 });
@@ -134,8 +137,8 @@ if(about){
   const aboutTitle=about.querySelector('h1');
   const aboutCopy=about.querySelector('p');
   if(aboutTitle)aboutTitle.textContent='About Me';
-  if(aboutCopy){aboutCopy.textContent='我喜欢从真实的生活出发，把复杂的问题梳理清楚，再用设计做出有温度、好用、有趣的体验。';const education=document.createElement('p');education.innerHTML='<strong>Education</strong><br>廊坊师范学院 · 产品设计<br><br>在校期间参与廊坊市精协与自闭症儿童康复机构开展的公益活动，并获市媒体报道；曾担任项目负责人，参与装置艺术作品落地、创新创业大赛与“挑战杯”并获奖；在校作品成功申请版权3项、专利1项，并积极参加“三下乡”非遗活动及志愿服务。';aboutCopy.after(education)}
-const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award-link')){const award=document.createElement('a');award.className='award-link';award.href='奖状.html';award.setAttribute('aria-label','查看 Design Awards 页面');award.innerHTML='<span class="award-content"><span>Design Awards</span><span class="award-arrow" aria-hidden="true"></span></span>';((stats.children[1]||stats.firstElementChild)||stats).appendChild(award)}
+  if(aboutCopy){aboutCopy.textContent='我喜欢从真实的生活出发，把复杂的问题梳理清楚，再用设计做出有温度、好用、有趣的体验。';const aiCopy=document.createElement('p');aiCopy.textContent='目前持续学习 AI 设计软件，熟悉 GPT、Codex、Gemini 和 Lovart 等工作流。';const education=document.createElement('p');education.innerHTML='<strong>Education</strong><br>廊坊师范学院 · 产品设计<br><br>在校期间参与廊坊市精协与自闭症儿童康复机构开展的公益活动，并获市媒体报道；曾担任项目负责人，参与装置艺术作品落地、创新创业大赛与“挑战杯”并获奖；在校作品成功申请版权3项、专利1项，并积极参加“三下乡”非遗活动及志愿服务。';aboutCopy.after(aiCopy,education)}
+const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award-link')){const award=document.createElement('a');award.className='award-link';award.href='奖状.html';award.setAttribute('aria-label','查看 Design Awards 页面');award.innerHTML='<span class="award-content"><span>Design Awards</span><span class="award-arrow" aria-hidden="true"></span></span>';((stats.children[0]||stats.firstElementChild)||stats).appendChild(award)}
 }
 const aboutImage=about?.querySelector('img');
 if(aboutImage){
