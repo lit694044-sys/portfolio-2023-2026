@@ -124,18 +124,19 @@ const projectMeta=[
   {title:'Silk Road',image:'项目七：Silk Road/标签封面.png'},
   {title:'GreenCosmos',image:'项目八：绿能环宇/project-8-cover.png'}
 ];
-items.slice(0,projectMeta.length).forEach((item,index)=>{const card=item.querySelector('.card');const meta=projectMeta[index];let image=card.querySelector('img');if(!image){image=document.createElement('img');card.prepend(image)}image.src=meta.image;image.alt=meta.title;const title=card.querySelector('h2');if(title){title.className='project-title';title.textContent=meta.title;card.appendChild(title)}});
+// 性能优化：项目封面进入视口附近才加载，页面视觉和卡片尺寸保持不变。
+const loadProjectImage=(item,index)=>{const card=item.querySelector('.card');const meta=projectMeta[index];let image=card.querySelector('img');if(!image){image=document.createElement('img');card.prepend(image)}image.loading='lazy';image.decoding='async';if(!image.src.endsWith(meta.image)){image.src=meta.image}image.alt=meta.title};
+items.slice(0,projectMeta.length).forEach((item,index)=>{const meta=projectMeta[index];const title=item.querySelector('h2');if(title){title.className='project-title';title.textContent=meta.title;item.querySelector('.card').appendChild(title)}});
+if('IntersectionObserver'in window){const imageObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const index=items.indexOf(entry.target);if(index>=0)loadProjectImage(entry.target,index);imageObserver.unobserve(entry.target)}}),{rootMargin:'400px 0px'});items.slice(0,projectMeta.length).forEach(item=>imageObserver.observe(item))}else{items.slice(0,projectMeta.length).forEach(loadProjectImage)}
 const cursor=document.querySelector('.cursor');
 let cursorX=0,cursorY=0,renderedX=0,renderedY=0;
-addEventListener('pointermove',event=>{cursorX=event.clientX;cursorY=event.clientY});
-const renderCursor=()=>{renderedX+=(cursorX-renderedX)*.18;renderedY+=(cursorY-renderedY)*.18;cursor.style.left=renderedX+'px';cursor.style.top=renderedY+'px';requestAnimationFrame(renderCursor)};renderCursor();
+const hasFinePointer=matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(hasFinePointer&&cursor){addEventListener('pointermove',event=>{cursorX=event.clientX;cursorY=event.clientY});const renderCursor=()=>{renderedX+=(cursorX-renderedX)*.18;renderedY+=(cursorY-renderedY)*.18;cursor.style.left=renderedX+'px';cursor.style.top=renderedY+'px';requestAnimationFrame(renderCursor)};renderCursor()}
 addEventListener('load',()=>{const returnScroll=sessionStorage.getItem('portfolio-return-scroll');if(returnScroll!==null){requestAnimationFrame(()=>{scrollTo(0,Number(returnScroll));sessionStorage.removeItem('portfolio-return-scroll')})}});
-document.querySelectorAll('a,button,.card-link').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('is-hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('is-hover'))});
+if(hasFinePointer&&cursor){document.querySelectorAll('a,button,.card-link').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('is-hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('is-hover'))})}
 items.forEach(item=>{
   item.addEventListener('click',event=>{if(item.getAttribute('href')&&item.getAttribute('href')!=='#'){sessionStorage.setItem('portfolio-return-scroll',String(scrollY))}});
-  item.addEventListener('mouseenter',()=>{const itemCenter=item.offsetLeft+item.offsetWidth/2;const targetLeft=itemCenter-track.clientWidth/2;track.scrollTo({left:Math.max(0,targetLeft),behavior:'smooth'})});
-  item.addEventListener('mousemove',event=>{const box=item.getBoundingClientRect();item.style.setProperty('--tx',((event.clientX-box.left)/box.width-.5)*10+'px');item.style.setProperty('--ty',((event.clientY-box.top)/box.height-.5)*10+'px')});
-  item.addEventListener('mouseleave',()=>{item.style.removeProperty('--tx');item.style.removeProperty('--ty')});
+  if(hasFinePointer){item.addEventListener('mouseenter',()=>{const itemCenter=item.offsetLeft+item.offsetWidth/2;const targetLeft=itemCenter-track.clientWidth/2;track.scrollTo({left:Math.max(0,targetLeft),behavior:'smooth'})});item.addEventListener('mousemove',event=>{const box=item.getBoundingClientRect();item.style.setProperty('--tx',((event.clientX-box.left)/box.width-.5)*10+'px');item.style.setProperty('--ty',((event.clientY-box.top)/box.height-.5)*10+'px')});item.addEventListener('mouseleave',()=>{item.style.removeProperty('--tx');item.style.removeProperty('--ty')})}
 });
 const about=document.querySelector('#about');
 if(about){
@@ -148,8 +149,8 @@ const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award
 const aboutImage=about?.querySelector('img');
 if(aboutImage){
   const lightbox=document.createElement('div');lightbox.className='image-lightbox';lightbox.setAttribute('role','dialog');lightbox.setAttribute('aria-label','放大查看个人经历图片');
-  const largeImage=document.createElement('img');largeImage.src=aboutImage.currentSrc||aboutImage.src;largeImage.alt=aboutImage.alt||'About Me';lightbox.appendChild(largeImage);document.body.appendChild(lightbox);
-  aboutImage.addEventListener('click',()=>lightbox.classList.add('is-open'));lightbox.addEventListener('click',()=>lightbox.classList.remove('is-open'));addEventListener('keydown',event=>event.key==='Escape'&&lightbox.classList.remove('is-open'));
+  document.body.appendChild(lightbox);const openLightbox=()=>{if(!lightbox.firstElementChild){const largeImage=document.createElement('img');largeImage.src=aboutImage.currentSrc||aboutImage.src;largeImage.alt=aboutImage.alt||'About Me';largeImage.decoding='async';lightbox.appendChild(largeImage)}lightbox.classList.add('is-open')};
+  aboutImage.addEventListener('click',openLightbox);lightbox.addEventListener('click',()=>lightbox.classList.remove('is-open'));addEventListener('keydown',event=>event.key==='Escape'&&lightbox.classList.remove('is-open'));
 }
 // 改动位置：仅在手机/平板小屏幕启用汉堡菜单。
 const menuToggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.nav');
