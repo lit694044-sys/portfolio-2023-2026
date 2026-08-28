@@ -28,6 +28,7 @@
       position: relative;
     }
     .spread.is-visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 700px) { .spread { opacity: 1; transform: none; transition: none; } .dot-glow, .dot-glow::after { animation: none; } }
     .spread:first-child { opacity: 1; transform: none; }
     .spread img { display: block; width: 100%; height: auto; cursor: pointer; }
     .dot-glow {
@@ -89,11 +90,11 @@
 <body>
   <div class="progress" aria-hidden="true"></div>
   <main>
-    <section class="spread" id="page-1"><img src="renova-cover.png?v=2" alt="ReNova 重生上肢康复辅助机器人项目封面"></section>
-    <section class="spread" id="page-2"><img src="renova-p1.png?v=2" alt="ReNova 问题与研究"></section>
-    <section class="spread" id="page-3"><img src="renova-p2.png?v=2" alt="ReNova 情绪板与设计概念"></section>
-    <section class="spread" id="page-4"><img src="renova-p3.png?v=2" alt="ReNova 交互与尺寸设计"></section>
-    <section class="spread" id="page-5"><img src="renova-p4.png?v=2" alt="ReNova 产品细节与使用场景"></section>
+    <section class="spread" id="page-1"><img src="renova-cover.png?v=2" alt="ReNova 重生上肢康复辅助机器人项目封面" width="3840" height="2160" loading="eager" fetchpriority="high" decoding="async"></section>
+    <section class="spread" id="page-2"><img src="renova-p1.png?v=2" alt="ReNova 问题与研究" width="3840" height="2160" loading="lazy" decoding="async"></section>
+    <section class="spread" id="page-3"><img src="renova-p2.png?v=2" alt="ReNova 情绪板与设计概念" width="3840" height="2160" loading="lazy" decoding="async"></section>
+    <section class="spread" id="page-4"><img src="renova-p3.png?v=2" alt="ReNova 交互与尺寸设计" width="3840" height="2160" loading="lazy" decoding="async"></section>
+    <section class="spread" id="page-5"><img src="renova-p4.png?v=2" alt="ReNova 产品细节与使用场景" width="3840" height="2160" loading="lazy" decoding="async"></section>
   </main>
   <nav class="controls" aria-label="页面导航">
     <a href="#page-1" aria-label="回到第一页">↑</a>
