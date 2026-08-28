@@ -96,14 +96,14 @@ section{padding:140px 0}.about{width:min(1700px,92vw);margin:auto;display:block}
 <div id="projects"><section class="fade"><div class="wrap">
 <h1>Selected Projects</h1>
 <div class="cards" id="project-track">
-<a class="card-link" href="renova-backup-20260815-021032/renova.html" aria-label="打开 ReNova 项目"><div class="card"><img src="assets/mobile/inline-2.webp" alt="ReNova" loading="lazy" decoding="async"><h2>ReNova</h2></div></a>
-<a class="card-link" href="pawwash-project/pawwash.html" aria-label="打开 PawWash 项目"><div class="card"><img src="assets/mobile/inline-3.webp" alt="PawWash" loading="lazy" decoding="async"><h2>PawWash</h2></div></a>
-<a class="card-link" href="interstellar-project/interstellar.html" aria-label="打开 Interstellar 项目"><div class="card"><h2>Interstellar</h2></div></a>
-<a class="card-link" href="wood-whisper.html" aria-label="打开 Wood Whisper 项目"><div class="card"><h2>Wood Whisper</h2></div></a>
-<a class="card-link" href="项目五：Sunlit/sunlit.html" aria-label="打开 Sunlit 项目"><div class="card"><h2>Sunlit</h2></div></a>
-<a class="card-link" href="项目六：Chasing the Pearl/chasing-the-pearl.html" aria-label="打开 Chasing the Pearl 项目"><div class="card"><h2>Chasing the Pearl</h2></div></a>
-<a class="card-link" href="项目七：Silk Road/silk-road.html" aria-label="打开 Silk Road 项目"><div class="card"><h2>Silk Road</h2></div></a>
-	<a class="card-link" href="项目八：绿能环宇/green-energy.html" aria-label="打开 GreenCosmos 项目"><div class="card"><h2>GreenCosmos</h2></div></a>
+<a class="card-link" href="renova-backup-20260815-021032/renova.html" aria-label="打开 ReNova 项目"><div class="card"><img src="assets/mobile/covers/project-1.webp" alt="ReNova" loading="lazy" decoding="async"><h2>ReNova</h2></div></a>
+<a class="card-link" href="pawwash-project/pawwash.html" aria-label="打开 PawWash 项目"><div class="card"><img src="assets/mobile/covers/project-2.webp" alt="PawWash" loading="lazy" decoding="async"><h2>PawWash</h2></div></a>
+<a class="card-link" href="interstellar-project/interstellar.html" aria-label="打开 Interstellar 项目"><div class="card"><img src="assets/mobile/covers/project-3.webp" alt="Interstellar" loading="lazy" decoding="async"><h2>Interstellar</h2></div></a>
+<a class="card-link" href="wood-whisper.html" aria-label="打开 Wood Whisper 项目"><div class="card"><img src="assets/mobile/covers/project-4.webp" alt="Wood Whisper" loading="lazy" decoding="async"><h2>Wood Whisper</h2></div></a>
+<a class="card-link" href="项目五：Sunlit/sunlit.html" aria-label="打开 Sunlit 项目"><div class="card"><img src="assets/mobile/covers/project-5.webp" alt="Sunlit" loading="lazy" decoding="async"><h2>Sunlit</h2></div></a>
+<a class="card-link" href="项目六：Chasing the Pearl/chasing-the-pearl.html" aria-label="打开 Chasing the Pearl 项目"><div class="card"><img src="assets/mobile/covers/project-6.webp" alt="Chasing the Pearl" loading="lazy" decoding="async"><h2>Chasing the Pearl</h2></div></a>
+<a class="card-link" href="项目七：Silk Road/silk-road.html" aria-label="打开 Silk Road 项目"><div class="card"><img src="assets/mobile/covers/project-7.webp" alt="Silk Road" loading="lazy" decoding="async"><h2>Silk Road</h2></div></a>
+	<a class="card-link" href="项目八：绿能环宇/green-energy.html" aria-label="打开 GreenCosmos 项目"><div class="card"><img src="assets/mobile/covers/project-8.webp" alt="GreenCosmos" loading="lazy" decoding="async"><h2>GreenCosmos</h2></div></a>
 	</div>
 	<div class="extra-work-links" aria-label="其它作品分类">
 	<a class="extra-work-link" href="其它作品.html">其它作品</a>
@@ -124,10 +124,8 @@ const projectMeta=[
   {title:'Silk Road',image:'项目七：Silk Road/标签封面.png'},
   {title:'GreenCosmos',image:'项目八：绿能环宇/project-8-cover.png'}
 ];
-// 性能优化：项目封面进入视口附近才加载，页面视觉和卡片尺寸保持不变。
-const loadProjectImage=(item,index)=>{const card=item.querySelector('.card');const meta=projectMeta[index];let image=card.querySelector('img');if(!image){image=document.createElement('img');card.prepend(image)}image.loading='lazy';image.decoding='async';if(!image.src.endsWith(meta.image)){image.src=meta.image}image.alt=meta.title};
+// 性能优化：项目封面由 HTML 固定对应并使用浏览器原生懒加载。
 items.slice(0,projectMeta.length).forEach((item,index)=>{const meta=projectMeta[index];const title=item.querySelector('h2');if(title){title.className='project-title';title.textContent=meta.title;item.querySelector('.card').appendChild(title)}});
-if('IntersectionObserver'in window){const imageObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const index=items.indexOf(entry.target);if(index>=0)loadProjectImage(entry.target,index);imageObserver.unobserve(entry.target)}}),{rootMargin:'400px 0px'});items.slice(0,projectMeta.length).forEach(item=>imageObserver.observe(item))}else{items.slice(0,projectMeta.length).forEach(loadProjectImage)}
 const cursor=document.querySelector('.cursor');
 let cursorX=0,cursorY=0,renderedX=0,renderedY=0;
 const hasFinePointer=matchMedia('(hover:hover) and (pointer:fine)').matches;
