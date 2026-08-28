@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>Portfolio 2023-2026</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5f6f8;color:#111;font-family:"Microsoft YaHei",Arial;cursor:none}
+.wrap{width:min(1700px,92%);margin:auto}
+.nav{height:90px;position:fixed;top:0;left:50%;transform:translateX(-50%);width:92%;z-index:10;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:34px;font-weight:900}.logo span{color:#ffc000}
+.nav a{margin:0 6px;text-decoration:none;color:#222;padding:14px 20px;border-radius:40px;transition:background .35s ease,color .35s ease,transform .35s ease}.nav a:hover,.nav a.active{background:#111;color:#fff}.btn{background:transparent;color:#222;padding:15px 32px;border-radius:40px;display:inline-block;transition:transform .25s ease,background .35s ease,color .35s ease}.nav a.btn{color:#222;margin-left:12px}.nav a.btn:hover,.nav a.btn.active{transform:translateY(-2px);background:#111;color:#fff}
+.cursor{position:fixed;left:0;top:0;width:16px;height:16px;border:2px solid #ffc000;background:rgba(255,192,0,.08);border-radius:50%;pointer-events:none;z-index:30;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease,box-shadow .25s ease;box-shadow:0 0 0 4px rgba(255,192,0,.08),0 0 18px rgba(255,192,0,.25);animation:cursorPulse 2.4s ease-in-out infinite}.cursor.is-hover{width:30px;height:30px;background:rgba(255,192,0,.16);box-shadow:0 0 0 7px rgba(255,192,0,.1),0 0 28px rgba(255,192,0,.38)}@keyframes cursorPulse{0%,100%{box-shadow:0 0 0 4px rgba(255,192,0,.08),0 0 18px rgba(255,192,0,.25)}50%{box-shadow:0 0 0 7px rgba(255,192,0,.04),0 0 25px rgba(255,192,0,.34)}}
+.cursor{width:18px;height:18px;border:1px solid rgba(255,192,0,.82);background:rgba(255,210,76,.12);box-shadow:0 0 0 4px rgba(255,192,0,.07),0 0 18px rgba(255,192,0,.22);animation:cursorPulse 2.8s ease-in-out infinite}.cursor::before{content:"";position:absolute;inset:5px;border-radius:50%;background:#ffc000;box-shadow:0 0 9px rgba(255,192,0,.8)}.cursor::after{content:"";position:absolute;inset:-25px;border-radius:50%;background:radial-gradient(circle,rgba(255,203,43,.17) 0,rgba(255,203,43,.07) 34%,transparent 70%);opacity:.78;animation:cursorGlow 2.8s ease-in-out infinite}.cursor.is-hover{width:30px;height:30px;background:rgba(255,192,0,.14);border-color:rgba(255,192,0,.96);box-shadow:0 0 0 7px rgba(255,192,0,.08),0 0 30px rgba(255,192,0,.36)}.cursor.is-hover::before{inset:8px}.cursor.is-hover::after{inset:-30px;opacity:1}@keyframes cursorPulse{0%,100%{box-shadow:0 0 0 4px rgba(255,192,0,.07),0 0 18px rgba(255,192,0,.22)}50%{box-shadow:0 0 0 7px rgba(255,192,0,.035),0 0 25px rgba(255,192,0,.3)}}@keyframes cursorGlow{0%,100%{transform:scale(.94);opacity:.68}50%{transform:scale(1.08);opacity:.9}}
+.hero{height:100vh;display:flex;align-items:center;background:linear-gradient(120deg,#fff,#e9edf2)}
+.hero h1{font-size:100px;line-height:1;letter-spacing:-5px;margin:20px 0}
+section{padding:140px 0}.about{width:min(1700px,92vw);margin:auto;display:block}.about img{display:block;width:100%;max-width:1700px;height:auto;border-radius:35px;cursor:none;transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .7s ease}.about img:hover{transform:scale(1.025);box-shadow:0 26px 70px rgba(45,55,65,.2)}.about>div{max-width:980px;margin:72px auto 0}.about>div>p{max-width:860px;line-height:1.9;font-size:22px}.about>div>p+p{margin-top:28px}.stats{display:flex;gap:80px;margin-top:50px}.stats b{font-size:55px}
+.image-lightbox{position:fixed;inset:0;background:rgba(10,12,16,.88);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease;z-index:40}.image-lightbox.is-open{opacity:1;visibility:visible}.image-lightbox img{max-width:min(1700px,94vw);max-height:92vh;width:auto;height:auto;border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.4)}
+.cards{display:flex;gap:28px;overflow-x:auto;overflow-y:visible;padding:58px 8vw 80px;scroll-snap-type:x proximity;scrollbar-width:none;perspective:1200px}.cards::-webkit-scrollbar{display:none}
+.card-link{flex:0 0 clamp(220px,22vw,360px);text-decoration:none;color:inherit;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}.card{height:500px;width:100%;background:var(--card-bg,#e5ebf2);border-radius:28px;overflow:hidden;position:relative;transform:translate3d(var(--tx,0),var(--ty,0),0) scale(.86);opacity:.62;transition:transform .75s cubic-bezier(.2,.8,.2,1),opacity .75s ease,box-shadow .75s ease}.card-link.is-focus .card{transform:translate3d(var(--tx,0),var(--ty,0),0) scale(1.08);opacity:1;box-shadow:0 24px 60px rgba(45,55,65,.18);z-index:2}.card img{width:88%;height:88%;margin:6% auto 0;object-fit:contain;display:block}.project-title{align-self:flex-start;margin:0 0 0 18px;color:rgba(17,17,17,.58);font-size:25px;font-weight:700;letter-spacing:.02em;line-height:1.2;transition:color .35s ease,transform .35s ease}.card-link.is-focus .project-title{color:rgba(17,17,17,.78);transform:translateY(-2px)}.card-link:nth-child(1){--card-bg:#e8ebef}.card-link:nth-child(2){--card-bg:#e3e8ed}.card-link:nth-child(3){--card-bg:#e9e7e3}.card-link:nth-child(4){--card-bg:#e5e9e7}.card-link:nth-child(5){--card-bg:#e9e6ea}.card-link:nth-child(6){--card-bg:#e6e8ec}.card-link:nth-child(7){--card-bg:#e8e9e5}.card-link:nth-child(8){--card-bg:#e4e7e9}.card.blank{background:var(--card-bg,#e5ebf2)}
+.card-link:hover .card{transform:translate3d(var(--tx,0),var(--ty,0),0) scale(1.08);opacity:1;box-shadow:0 24px 60px rgba(45,55,65,.18);z-index:2}.card-link:hover .project-title{color:rgba(17,17,17,.78);transform:translateY(-2px)}
+.fade{opacity:0;transform:translateY(40px);transition:opacity 1s ease,transform 1s ease}.show{opacity:1;transform:none}
+.contact{height:100vh;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}.contact h1{font-size:100px;line-height:1}.contact p{line-height:2;font-size:18px}
+@media(max-width:900px){.hero h1,.contact h1{font-size:50px}.about{width:92vw}.about>div{margin-top:48px}.about>div>p{font-size:18px}.card-link{flex-basis:72vw}.cards{padding-left:14vw;padding-right:14vw}}
+/* Large, soft cursor glow inspired by the reference image. */
+.cursor{width:22px;height:22px;border:0;background:radial-gradient(circle,rgba(255,199,44,.9) 0 8%,rgba(255,210,76,.38) 25%,rgba(255,220,110,.16) 48%,transparent 74%);box-shadow:0 0 22px rgba(255,194,35,.45),0 0 58px rgba(255,205,66,.28);mix-blend-mode:multiply}
+.cursor::before{inset:7px;background:#ffc42e;box-shadow:0 0 12px rgba(255,190,20,.9)}
+.cursor::after{inset:-48px;background:radial-gradient(circle,rgba(255,210,76,.22) 0,rgba(255,220,110,.12) 34%,transparent 72%);opacity:.9}
+.cursor.is-hover{width:30px;height:30px;background:radial-gradient(circle,rgba(255,199,44,.95) 0 8%,rgba(255,210,76,.42) 25%,rgba(255,220,110,.18) 50%,transparent 76%);box-shadow:0 0 28px rgba(255,194,35,.55),0 0 76px rgba(255,205,66,.34)}
+.cursor.is-hover::before{inset:9px}.cursor.is-hover::after{inset:-62px}
+.card-link{cursor:none;will-change:transform}.card{will-change:transform,box-shadow}.card img{pointer-events:none}
+.project-lightbox{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:48px;background:rgba(10,12,16,.9);opacity:0;visibility:hidden;transition:opacity .42s ease,visibility .42s ease;cursor:none}
+.project-lightbox.is-open{opacity:1;visibility:visible}.project-lightbox img{display:block;max-width:min(1500px,88vw);max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:22px;box-shadow:0 32px 100px rgba(0,0,0,.5);transform:scale(.92);transition:transform .52s cubic-bezier(.2,.8,.2,1)}.project-lightbox.is-open img{transform:scale(1)}
+.project-lightbox__caption{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);color:#fff;font-size:18px;letter-spacing:.08em}.project-lightbox__close{position:absolute;top:24px;right:30px;border:0;background:rgba(255,255,255,.12);color:#fff;width:48px;height:48px;border-radius:50%;font-size:28px;line-height:1;cursor:none}
+@media (hover:hover) and (pointer:fine){body{cursor:none}}
+@media (hover:none),(pointer:coarse){body{cursor:auto}.cursor{display:none}.card-link{cursor:pointer}.project-lightbox{cursor:auto}.project-lightbox__close{cursor:pointer}}
+/* 项目卡片只响应当前鼠标所在项，不再因居中状态一起放大；项目卡片不使用全屏放大层。 */
+.card-link.is-focus .card{transform:translate3d(var(--tx,0),var(--ty,0),0) scale(.86);opacity:.62;box-shadow:none;z-index:auto}.card-link.is-focus .project-title{color:rgba(17,17,17,.58);transform:none}.project-lightbox{display:none!important}
+/* PC 端光标只保留柔和光晕和中心亮点，不显示外圈线。 */
+.cursor{border:0!important;outline:0!important;width:34px;height:34px;opacity:1;visibility:visible;background:radial-gradient(circle,rgba(255,205,66,.22) 0,rgba(255,220,110,.15) 28%,rgba(255,230,150,.08) 52%,transparent 76%)!important;box-shadow:none!important;animation:none!important}
+.cursor::before{display:none!important}
+.cursor::after{inset:-18px;border:0!important;outline:0!important;background:radial-gradient(circle,rgba(255,210,76,.18) 0,rgba(255,220,110,.09) 40%,transparent 72%);opacity:1;animation:none}
+.cards{scroll-behavior:smooth}
+.card{position:relative}
+.project-title{position:absolute;left:50%;bottom:34px;z-index:3;width:88%;margin:0;transform:translateX(-50%);text-align:center;color:rgba(17,17,17,.72);text-shadow:0 1px 12px rgba(255,255,255,.7);pointer-events:none}
+.card-link:hover .project-title{transform:translateX(-50%) translateY(-2px)}
+.extra-work-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:100%;margin:0 auto 96px;padding:0 8vw}
+.extra-work-link{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:96px;padding:28px 34px;border:0;border-radius:18px;background:rgba(255,255,255,.72);color:#59616b;text-decoration:none;font-size:22px;font-weight:700;letter-spacing:.08em;box-shadow:0 10px 28px rgba(50,60,70,.1);transition:transform .25s ease,background .25s ease,color .25s ease,box-shadow .25s ease}
+.extra-work-link:hover{background:#59616b;color:#fff;transform:translateY(-5px);box-shadow:0 16px 34px rgba(50,60,70,.2)}
+.extra-work-link:active{transform:translateY(-1px) scale(.96);box-shadow:0 5px 12px rgba(50,60,70,.12)}
+@media(max-width:900px){.extra-work-links{gap:12px;margin-bottom:64px;padding:0 8vw}.extra-work-link{min-height:96px;padding:22px 14px;font-size:18px}}
+.award-link{display:inline-flex;align-items:center;justify-content:center;width:186px;height:42px;margin:32px 0 0;padding:0 15px;border:1px solid rgba(89,97,107,.38);border-radius:8px;background:rgba(255,255,255,.22);color:#59616b;text-decoration:none;font-size:14px;font-weight:400;letter-spacing:.02em;white-space:nowrap;line-height:1;transition:background .3s ease,border-color .3s ease,color .3s ease}
+.award-content{display:inline-flex;align-items:center;gap:8px;transition:transform .3s ease}.award-arrow{display:block;width:8px;height:8px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(-45deg)}.award-link:hover{background:rgba(89,97,107,.08);border-color:#59616b;color:#394652}.award-link:hover .award-content{transform:translateX(3px)}
+.stats>div:first-child,.stats>div:nth-child(2){display:flex;flex-direction:column;align-items:flex-start}.stats>div:first-child .award-link,.stats>div:nth-child(2) .award-link{display:flex;flex:none;width:186px;margin-top:32px}
+@media(max-width:900px){.award-link{width:186px;height:42px;margin-top:28px;font-size:14px}.stats>div:first-child .award-link{width:186px;margin-top:28px}}
+/* 手机版专用布局 */
+@media(max-width:900px){
+  html,body{width:100%;overflow-x:hidden}
+  .wrap{width:88%;}
+  .nav{height:auto;top:0;width:88%;padding:12px 0 10px;display:flex;flex-direction:column;align-items:stretch;gap:7px;background:rgba(245,246,248,.78);backdrop-filter:blur(12px)}
+  .logo{font-size:26px;line-height:1}
+  .nav>div:last-child{display:flex;width:100%;justify-content:space-between;gap:3px}
+  .nav a{margin:0;padding:8px 9px;font-size:13px;line-height:1.1}
+  .nav a.btn{display:none}
+  .hero{min-height:100svh;height:auto;padding:120px 0 70px}
+  .hero h1,.contact h1{font-size:46px;letter-spacing:-2px;line-height:1.05}
+  .hero p{font-size:12px;letter-spacing:.04em}
+  section{padding:88px 0}
+  .about{width:88vw}
+  .about img{border-radius:22px}
+  .about>div{width:100%;margin-top:42px}
+  .about>div>p{font-size:17px;line-height:1.85}
+  .about>div>p+p{margin-top:22px}
+  .stats{flex-direction:column;gap:28px;margin-top:36px}
+  .stats b{font-size:42px}
+  .stats>div:first-child .award-link,.award-link{width:100%;height:52px;margin-top:30px}
+  .cards{gap:18px;padding:36px 11vw 58px}
+  .card-link{flex-basis:78vw;gap:12px}
+  .card{height:430px;border-radius:22px}
+  .project-title{font-size:21px;bottom:28px}
+  .extra-work-links{grid-template-columns:1fr;gap:14px;width:100%;margin:0 auto 70px;padding:0 11vw}
+  .extra-work-link{min-height:96px;padding:22px 14px;font-size:18px}
+  .contact{min-height:100svh;height:auto;padding:80px 0}
+  .contact p{font-size:15px;line-height:1.8}
+}
+/* 改动位置：以下仅在手机/平板小屏幕生效，电脑端页面不受影响。 */
+@media(max-width:900px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .menu-toggle{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;border:0;background:transparent;cursor:pointer}.menu-toggle span{display:block;width:22px;height:2px;background:#111;transition:transform .2s ease,opacity .2s ease}
+  .nav{height:64px;width:calc(100% - 28px);padding:0;flex-direction:row;align-items:center;background:rgba(245,246,248,.92);backdrop-filter:blur(10px)}.logo{font-size:26px}.nav>div:last-child{position:absolute;top:64px;left:0;right:0;display:none;flex-direction:column;gap:4px;padding:10px 12px;background:rgba(245,246,248,.97);border-top:1px solid rgba(17,17,17,.08)}.nav.nav-open>div:last-child{display:flex}.nav a{display:block;margin:0;padding:12px 10px;font-size:15px;line-height:1.2}.nav a.btn{display:none}.nav.nav-open .menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav.nav-open .menu-toggle span:nth-child(2){opacity:0}.nav.nav-open .menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .hero{min-height:100svh;height:auto;padding:100px 0 72px}.hero h1,.contact h1{font-size:clamp(42px,12vw,58px);letter-spacing:-2px}.about{width:calc(100% - 28px);max-width:none}.about>div{width:100%;margin-top:40px}.about>div>p{font-size:16px;line-height:1.8;overflow-wrap:anywhere}.stats{gap:28px;flex-wrap:wrap}.stats b{font-size:42px}
+  .cards{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;overflow:visible;padding:28px 0 52px;perspective:none}.card-link{width:100%;min-width:0;flex-basis:auto;gap:10px;touch-action:pan-y}.card{height:min(112vw,430px);transform:scale(1);opacity:1}.card-link.is-focus .card{transform:scale(1);box-shadow:none}.project-title{font-size:20px;margin-left:12px}.extra-work-links{grid-template-columns:1fr;padding:0;margin-bottom:48px}.extra-work-link{min-height:68px;padding:18px 14px;font-size:17px}.contact{min-height:100svh;height:auto;padding:100px 14px}
+}
+</style></head>
+<body>
+<div class="cursor" aria-hidden="true"></div>
+<div class="nav"><div class="logo">Portfolio<span>.</span></div><button class="menu-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false" hidden><span></span><span></span><span></span></button><div><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a><a class="btn" href="#contact">联系我</a></div></div>
+<section class="hero"><div class="wrap"><p>DESIGN PORTFOLIO / 2023-2026</p><h1>Creating<br>meaningful<br>experiences.</h1><span class="btn">Start Project →</span></div></section>
+<section class="fade" id="about"><div class="wrap about"><img src="assets/mobile/inline-1.png" alt="个人经历" loading="lazy" decoding="async"><div><h1>个人经历</h1><h2>Product Designer</h2><p>专注产品设计、工业设计与数字体验。通过设计研究、视觉表达和AI工具打造具有商业价值的产品。</p><div class="stats"><div><b>20+</b><br>项目经验</div><div><b>15+</b><br>设计奖项</div></div></div></div></section>
+<div id="projects"><section class="fade"><div class="wrap">
+<h1>Selected Projects</h1>
+<div class="cards" id="project-track">
+<a class="card-link" href="renova-backup-20260815-021032/renova.html" aria-label="打开 ReNova 项目"><div class="card"><img src="assets/mobile/inline-2.png" alt="ReNova" loading="lazy" decoding="async"><h2>ReNova</h2></div></a>
+<a class="card-link" href="pawwash-project/pawwash.html" aria-label="打开 PawWash 项目"><div class="card"><img src="assets/mobile/inline-3.png" alt="PawWash" loading="lazy" decoding="async"><h2>PawWash</h2></div></a>
+<a class="card-link" href="interstellar-project/interstellar.html" aria-label="打开 Interstellar 项目"><div class="card"><h2>Interstellar</h2></div></a>
+<a class="card-link" href="wood-whisper.html" aria-label="打开 Wood Whisper 项目"><div class="card"><h2>Wood Whisper</h2></div></a>
+<a class="card-link" href="项目五：Sunlit/sunlit.html" aria-label="打开 Sunlit 项目"><div class="card"><h2>Sunlit</h2></div></a>
+<a class="card-link" href="项目六：Chasing the Pearl/chasing-the-pearl.html" aria-label="打开 Chasing the Pearl 项目"><div class="card"><h2>Chasing the Pearl</h2></div></a>
+<a class="card-link" href="项目七：Silk Road/silk-road.html" aria-label="打开 Silk Road 项目"><div class="card"><h2>Silk Road</h2></div></a>
+	<a class="card-link" href="项目八：绿能环宇/green-energy.html" aria-label="打开 GreenCosmos 项目"><div class="card"><h2>GreenCosmos</h2></div></a>
+	</div>
+	<div class="extra-work-links" aria-label="其它作品分类">
+	<a class="extra-work-link" href="其它作品.html">其它作品</a>
+	<a class="extra-work-link" href="手工制作.html">手工制作</a>
+	</div>
+	</div></section></div>
+<div id="contact"><section class="contact"><div><h1>Let's create<br>something great.</h1><p>Email · 1943079376@qq.com<br>Phone / WeChat · 18657531465</p></div></section></div>
+<script>
+const track=document.getElementById('project-track');
+const items=[...track.querySelectorAll('.card-link')];
+const projectMeta=[
+  {title:'ReNova',image:'项目一：Renove/标签首页封面.png'},
+  {title:'PawWash',image:'项目二：PawWash/标签首页封面.png'},
+  {title:'Interstellar',image:'项目三：Interstellar/项目首页封面.png'},
+  {title:'Wood Whisper',image:'项目四/Wood Whisper-标签.png'},
+  {title:'Sunlit',image:'项目五：Sunlit/cover.png'},
+  {title:'Chasing the Pearl',image:'项目六：Chasing the Pearl/标签封面.png'},
+  {title:'Silk Road',image:'项目七：Silk Road/标签封面.png'},
+  {title:'GreenCosmos',image:'项目八：绿能环宇/project-8-cover.png'}
+];
+// 性能优化：项目封面进入视口附近才加载，页面视觉和卡片尺寸保持不变。
+const loadProjectImage=(item,index)=>{const card=item.querySelector('.card');const meta=projectMeta[index];let image=card.querySelector('img');if(!image){image=document.createElement('img');card.prepend(image)}image.loading='lazy';image.decoding='async';if(!image.src.endsWith(meta.image)){image.src=meta.image}image.alt=meta.title};
+items.slice(0,projectMeta.length).forEach((item,index)=>{const meta=projectMeta[index];const title=item.querySelector('h2');if(title){title.className='project-title';title.textContent=meta.title;item.querySelector('.card').appendChild(title)}});
+if('IntersectionObserver'in window){const imageObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const index=items.indexOf(entry.target);if(index>=0)loadProjectImage(entry.target,index);imageObserver.unobserve(entry.target)}}),{rootMargin:'400px 0px'});items.slice(0,projectMeta.length).forEach(item=>imageObserver.observe(item))}else{items.slice(0,projectMeta.length).forEach(loadProjectImage)}
+const cursor=document.querySelector('.cursor');
+let cursorX=0,cursorY=0,renderedX=0,renderedY=0;
+const hasFinePointer=matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(hasFinePointer&&cursor){addEventListener('pointermove',event=>{cursorX=event.clientX;cursorY=event.clientY});const renderCursor=()=>{renderedX+=(cursorX-renderedX)*.18;renderedY+=(cursorY-renderedY)*.18;cursor.style.left=renderedX+'px';cursor.style.top=renderedY+'px';requestAnimationFrame(renderCursor)};renderCursor()}
+addEventListener('load',()=>{const returnScroll=sessionStorage.getItem('portfolio-return-scroll');if(returnScroll!==null){requestAnimationFrame(()=>{scrollTo(0,Number(returnScroll));sessionStorage.removeItem('portfolio-return-scroll')})}});
+if(hasFinePointer&&cursor){document.querySelectorAll('a,button,.card-link').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('is-hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('is-hover'))})}
+items.forEach(item=>{
+  item.addEventListener('click',event=>{if(item.getAttribute('href')&&item.getAttribute('href')!=='#'){sessionStorage.setItem('portfolio-return-scroll',String(scrollY))}});
+  if(hasFinePointer){item.addEventListener('mouseenter',()=>{const itemCenter=item.offsetLeft+item.offsetWidth/2;const targetLeft=itemCenter-track.clientWidth/2;track.scrollTo({left:Math.max(0,targetLeft),behavior:'smooth'})});item.addEventListener('mousemove',event=>{const box=item.getBoundingClientRect();item.style.setProperty('--tx',((event.clientX-box.left)/box.width-.5)*10+'px');item.style.setProperty('--ty',((event.clientY-box.top)/box.height-.5)*10+'px')});item.addEventListener('mouseleave',()=>{item.style.removeProperty('--tx');item.style.removeProperty('--ty')})}
+});
+const about=document.querySelector('#about');
+if(about){
+  const aboutTitle=about.querySelector('h1');
+  const aboutCopy=about.querySelector('p');
+  if(aboutTitle)aboutTitle.textContent='About Me';
+  if(aboutCopy){aboutCopy.textContent='我喜欢从真实的生活出发，把复杂的问题梳理清楚，再用设计做出有温度、好用、有趣的体验。';const aiCopy=document.createElement('p');aiCopy.textContent='目前持续学习 AI 设计软件，熟悉 GPT、Codex、Gemini 和 Lovart 等工作流。';const education=document.createElement('p');education.innerHTML='<strong>Education</strong><br>廊坊师范学院 · 产品设计<br><br>在校期间参与廊坊市精协与自闭症儿童康复机构开展的公益活动，并获市媒体报道；曾担任项目负责人，参与装置艺术作品落地、创新创业大赛与“挑战杯”并获奖；在校作品成功申请版权3项、专利1项，并积极参加“三下乡”非遗活动及志愿服务。';aboutCopy.after(aiCopy,education)}
+const stats=about.querySelector('.stats');if(stats&&!stats.querySelector('.award-link')){const award=document.createElement('a');award.className='award-link';award.href='奖状.html';award.setAttribute('aria-label','查看 Design Awards 页面');award.innerHTML='<span class="award-content"><span>Design Awards</span><span class="award-arrow" aria-hidden="true"></span></span>';((stats.children[0]||stats.firstElementChild)||stats).appendChild(award)}
+}
+const aboutImage=about?.querySelector('img');
+if(aboutImage){
+  const lightbox=document.createElement('div');lightbox.className='image-lightbox';lightbox.setAttribute('role','dialog');lightbox.setAttribute('aria-label','放大查看个人经历图片');
+  document.body.appendChild(lightbox);const openLightbox=()=>{if(!lightbox.firstElementChild){const largeImage=document.createElement('img');largeImage.src=aboutImage.currentSrc||aboutImage.src;largeImage.alt=aboutImage.alt||'About Me';largeImage.decoding='async';lightbox.appendChild(largeImage)}lightbox.classList.add('is-open')};
+  aboutImage.addEventListener('click',openLightbox);lightbox.addEventListener('click',()=>lightbox.classList.remove('is-open'));addEventListener('keydown',event=>event.key==='Escape'&&lightbox.classList.remove('is-open'));
+}
+// 改动位置：仅在手机/平板小屏幕启用汉堡菜单。
+const menuToggle=document.querySelector('.menu-toggle');const nav=document.querySelector('.nav');
+if(matchMedia('(max-width:900px)').matches&&menuToggle&&nav){menuToggle.hidden=false;menuToggle.addEventListener('click',()=>{const open=nav.classList.toggle('nav-open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'关闭导航菜单':'打开导航菜单')});nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('nav-open');menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','打开导航菜单')}))}
+const navLinks=[...document.querySelectorAll('.nav a[href^="#"]')].filter(link=>!link.classList.contains('btn'));
+const navSections=navLinks.map(link=>({link,section:document.querySelector(link.getAttribute('href'))})).filter(item=>item.section);
+const setActiveNav=section=>{navSections.forEach(item=>item.link.classList.toggle('active',item.section===section));const active=navSections.find(item=>item.section===section);active?.link.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})};
+navSections.forEach(item=>item.link.addEventListener('click',()=>setActiveNav(item.section)));
+const navObserver=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting&&setActiveNav(entry.target)),{rootMargin:'-35% 0px -55% 0px',threshold:0});navSections.forEach(item=>navObserver.observe(item.section));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting&&entry.target.classList.add('show')),{threshold:.1});document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
+</body></html>
