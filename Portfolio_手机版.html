@@ -95,7 +95,7 @@ section{padding:140px 0}.about{width:min(1700px,92vw);margin:auto;display:block}
 <a class="card-link" href="项目五：Sunlit/sunlit.html" aria-label="打开 Sunlit 项目"><div class="card"><h2>Sunlit</h2></div></a>
 <a class="card-link" href="项目六：Chasing the Pearl/chasing-the-pearl.html" aria-label="打开 Chasing the Pearl 项目"><div class="card"><h2>Chasing the Pearl</h2></div></a>
 <a class="card-link" href="项目七：Silk Road/silk-road.html" aria-label="打开 Silk Road 项目"><div class="card"><h2>Silk Road</h2></div></a>
-	<div class="card-link" aria-label="空白项目封面"><div class="card blank"></div></div>
+	<a class="card-link" href="项目八：绿能环宇/green-energy.html" aria-label="打开 绿能环宇 项目"><div class="card"><h2>绿能环宇</h2></div></a><div class="card-link" aria-label="空白项目封面"><div class="card blank"></div></div>
 	</div>
 	<div class="extra-work-links" aria-label="其它作品分类">
 	<a class="extra-work-link" href="其它作品.html">其它作品</a>
@@ -113,7 +113,8 @@ const projectMeta=[
   {title:'Wood Whisper',image:'项目四/Wood Whisper-标签.png'},
   {title:'Sunlit',image:'项目五：Sunlit/cover.png'},
   {title:'Chasing the Pearl',image:'项目六：Chasing the Pearl/标签封面.png'},
-  {title:'Silk Road',image:'项目七：Silk Road/标签封面.png'}
+  {title:'Silk Road',image:'项目七：Silk Road/标签封面.png'},
+  {title:'绿能环宇',image:'项目八：绿能环宇/project-8-cover.png'}
 ];
 items.slice(0,projectMeta.length).forEach((item,index)=>{const card=item.querySelector('.card');const meta=projectMeta[index];let image=card.querySelector('img');if(!image){image=document.createElement('img');card.prepend(image)}image.src=meta.image;image.alt=meta.title;const title=card.querySelector('h2');if(title){title.className='project-title';title.textContent=meta.title;card.appendChild(title)}});
 const cursor=document.querySelector('.cursor');

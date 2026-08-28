@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绿能环宇｜社区电车棚可持续性设计</title>
+  <style>
+    :root{--edge:28px;--ink:#4b5057}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:#edf0f3;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif;overflow-x:hidden}
+    main{padding:var(--edge) var(--edge) 52px}.spread{width:min(100%,1920px);margin:0 auto 24px;background:#f8f9fa;box-shadow:0 14px 38px rgba(50,60,70,.08);overflow:hidden;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.spread:first-child,.spread.is-visible{opacity:1;transform:none}.spread img{display:block;width:100%;height:auto;cursor:zoom-in}
+    .controls{position:fixed;right:18px;bottom:18px;z-index:4;display:flex;gap:8px}.controls a{width:42px;height:42px;display:grid;place-items:center;border:1px solid #c6ccd1;border-radius:50%;background:#ffffffe6;color:var(--ink);text-decoration:none;font-size:24px;backdrop-filter:blur(10px)}
+    .lightbox{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:28px;background:#11161ce6;opacity:0;visibility:hidden;transition:opacity .3s ease}.lightbox.open{opacity:1;visibility:visible}.lightbox img{max-width:96vw;max-height:92vh;width:auto;height:auto;object-fit:contain}.lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border:1px solid #ffffff59;border-radius:50%;background:#ffffff1a;color:#fff;font-size:20px;cursor:pointer}
+    @media(max-width:700px){:root{--edge:10px}.spread{margin-bottom:10px}.controls{right:12px;bottom:12px}.controls a{width:38px;height:38px}}
+    @media(prefers-reduced-motion:reduce){.spread{opacity:1;transform:none;transition:none}}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="spread" id="page-1"><img src="project-8-cover.png" alt="绿能环宇项目标签封面"></section>
+    <section class="spread" id="page-2"><img src="project-8-page-1.jpg" alt="绿能环宇项目介绍"></section>
+    <section class="spread" id="page-3"><img src="project-8-page-2.jpg" alt="绿能环宇实地考察"></section>
+    <section class="spread" id="page-4"><img src="project-8-page-3.jpg" alt="绿能环宇用户分析"></section>
+    <section class="spread" id="page-5"><img src="project-8-page-4.jpg" alt="绿能环宇使用流程图"></section>
+    <section class="spread" id="page-6"><img src="project-8-page-5.jpg" alt="绿能环宇设计细节"></section>
+  </main>
+  <nav class="controls" aria-label="页面导航"><a href="#page-1" aria-label="回到第一页">↑</a><a href="#page-6" aria-label="前往最后一页">↓</a></nav>
+  <div class="lightbox" id="lightbox"><button class="lightbox-close" aria-label="关闭">×</button><img id="lightbox-image" alt=""></div>
+  <script>
+    const pages=document.querySelectorAll('.spread');
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('is-visible')),{threshold:.08});pages.forEach(p=>observer.observe(p))}
+    const box=document.getElementById('lightbox'),preview=document.getElementById('lightbox-image');const close=()=>{box.classList.remove('open');document.body.style.overflow=''};document.querySelectorAll('.spread img').forEach(img=>img.addEventListener('click',()=>{preview.src=img.src;preview.alt=img.alt;box.classList.add('open');document.body.style.overflow='hidden'}));document.querySelector('.lightbox-close').addEventListener('click',close);box.addEventListener('click',e=>e.target===box&&close());addEventListener('keydown',e=>e.key==='Escape'&&close());
+  </script>
+</body>
+</html>
